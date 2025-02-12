@@ -205,9 +205,9 @@
     }
 
     const images = [
-        "https://media.allure.com/photos/636c23d7d869a8e3f2d1c59f/3:4/w_748%2Cc_limit/Bubble%2520Overnight%2520Hydrating%2520Sleep%2520Mask.png",
-        "https://media.ulta.com/i/ulta/2630686?w=600&$ProductCardNeutralBGLight$&fmt=auto",
-        "https://www.byrdie.com/thmb/GK2xgwI5KvFg4wXMVDwgK2xQnBQ=/400x0/filters:no_upscale():max_bytes(150000):strip_icc()/bubble7-506b184a64f14876a64205b858da33b8.jpg",
+        "https://i.etsystatic.com/27537528/r/il/e9fbcb/3294062986/il_fullxfull.3294062986_pz2p.jpg",
+        "https://i.etsystatic.com/27537528/r/il/3fe805/3314621380/il_570xN.3314621380_qsrj.jpg",
+        "https://i.etsystatic.com/27537528/r/il/2b5752/4181234332/il_570xN.4181234332_95rb.jpg)",
         "https://i5.walmartimages.com/seo/Bubble-Skincare-Water-Slide-Hydration-Boosting-Serum-Hyaluronic-Acid-Peptides-1-fl-oz-30ml_8a26f54e-03f3-4de6-b7e7-6f06cc44812e.987b93b8629f2bf985927ad955932b1c.jpeg"
     ];
 
