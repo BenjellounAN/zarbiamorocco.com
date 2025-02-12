@@ -172,11 +172,11 @@
     <h2>Our Products</h2>
     <div class="product-grid">
         <div class="product">
-            <img src="https://source.unsplash.com/200x200/?makeup" alt="Product">
+            <img src="https://i.etsystatic.com/27537528/r/il/2b5752/4181234332/il_570xN.4181234332_95rb.jpg" alt="Product">
             <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
         </div>
         <div class="product">
-            <img src="https://source.unsplash.com/200x200/?skincare" alt="Product">
+            <img src="https://i.etsystatic.com/27537528/r/il/6ad95a/4181234178/il_570xN.4181234178_2xfg.jpg" alt="Product">
             <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
         </div>
     </div>
