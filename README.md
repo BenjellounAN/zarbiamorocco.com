@@ -64,7 +64,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: background-image 1s ease-in-out;
+            transition: background-size: cover; /* يجعل الصورة تغطي الخلفية بالكامل */
         }
 
         /* زر Shop Now */
