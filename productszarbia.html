@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Grid</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: #f8f8f8;
+    }
+
+    .products-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      /* عمودان لكل صف */
+      gap: 15px;
+      /* تقليل المسافة بين المنتجات */
+      justify-content: center;
+      max-width: 900px;
+      /* زيادة العرض لتتناسب الصور */
+      margin: auto;
+    }
+
+    .product {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      background-color: #fff;
+    }
+
+    .product img {
+      width: 100%;
+      /* الصورة تأخذ كل عرض البطاقة */
+      max-width: 400px;
+      /* تكبير الصورة لأقصى حد */
+      height: auto;
+      border-radius: 5px;
+      display: block;
+      margin: auto;
+    }
+
+    .product-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .price {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: black;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      background-color: #444;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #B87B2C;
+      color: white;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #965f22;
+      transform: scale(1.05);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .back-button img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .back-button {
+      margin-bottom: 80px;
+      /* إضافة مسافة أسفل زر الرجوع */
+    }
+
+    .products-container {
+      margin-top: 80px;
+      /* مسافة من أعلى الحاوية التي تحتوي على المنتجات */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="products-container">
+    <div class="product">
+      <img src="https://i.etsystatic.com/27537528/r/il/e9fbcb/3294062986/il_fullxfull.3294062986_pz2p.jpg" alt="Product Image">
+      <div class="product-title">Love Ring, Classic Model</div>
+      <div class="price">$1,940</div>
+      <button class="btn">SELECT SIZE</button>
+    </div>
+
+    <div class="product">
+      <img src="https://i.etsystatic.com/27537528/r/il/e9fbcb/3294062986/il_fullxfull.3294062986_pz2p.jpg">
+      <div class="product-title">Love Bracelet, Classic Model</div>
+      <div class="price">$7,350</div>
+      <button class="btn">SELECT SIZE</button>
+    </div>
+
+    <div class="product">
+      <img src="https://i.etsystatic.com/27537528/r/il/e9fbcb/3294062986/il_fullxfull.3294062986_pz2p.jpg" alt="Product Image">
+      <div class="product-title">Diamond Ring, Elegant Model</div>
+      <div class="price">$5,050</div>
+      <button class="btn">SELECT SIZE</button>
+    </div>
+
+    <div class="product">
+      <img src="https://i.etsystatic.com/27537528/r/il/e9fbcb/3294062986/il_fullxfull.3294062986_pz2p.jpg">
+      <div class="product-title">Gold Bracelet, Luxury Model</div>
+      <div class="price">$2,170</div>
+      <button class="btn">SELECT SIZE</button>
+    </div>
+    <button class="back-button" onclick="goBack()">
+      <img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="Back">
+      Back
+    </button>
+
+  </div>
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+
+</html>
