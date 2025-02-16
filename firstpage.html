@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Store</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: white;
+      padding-bottom: 60px;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      padding: 7px 8px;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .icon {
+      font-size: 19px;
+      color: #B87B2C;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .icon:hover {
+      transform: scale(1.1);
+    }
+
+    .logo img {
+      height: 70px;
+    }
+
+    .menu-button {
+      font-size: 35px;
+      color: #B87B2C;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+
+    .menu-button:hover {
+      transform: scale(1.1);
+    }
+
+    .slider-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 80px auto 20px auto;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .prev,
+    .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .category-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .category-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: white;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+      overflow: hidden;
+    }
+
+    .category-button:hover {
+      transform: scale(1.1);
+    }
+
+    .category-button img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+
+    .category-label {
+      margin-top: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      color: black;
+      text-align: center;
+    }
+
+    .products-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      justify-content: center;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .product {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      background-color: #fff;
+    }
+
+    .product img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 5px;
+      display: block;
+      margin: auto;
+    }
+
+    .product-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .price {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: black;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      border-radius: 5px;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 80px auto 30px auto;
+      /* زيادة المسافة أسفل السليدر */
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .category-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+      /* زيادة المسافة بين السليدر والأقسام */
+    }
+
+    .products-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      justify-content: center;
+      max-width: 900px;
+      margin: 30px auto;
+      /* زيادة المسافة بين الأقسام والمنتجات */
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      text-decoration: underline;
+      margin: 20px 0;
+    }
+
+    .show-more-btn {
+      display: block;
+      margin: 100px auto;
+      padding: 5px 2px;
+      background-color: #B87B2C;
+      /* Your main color */
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 90px;
+      height: 45px;
+    }
+
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #B87B2C;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .whatsapp-button:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-button img {
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="icons">
+      <i class="fas fa-search icon" onclick="toggleSearch()"></i>
+      <i class="fas fa-shopping-cart icon"></i>
+    </div>
+
+    <div class="logo">
+      <img src="https://github.com/user-attachments/assets/02a130f0-0046-498d-9452-0aa20607509c" alt="Logo">
+    </div>
+
+    <div class="menu-button" onclick="toggleMenu()"> ☰ .</div>
+  </div>
+
+  <!-- Slider -->
+  <div class="slider-container">
+    <div class="slides">
+      <div class="slide">
+        <a href="page1.html">
+          <img src="https://i.etsystatic.com/27537528/r/il/2f7ce5/3001865965/il_570xN.3001865965_smzz.jpg" alt="Image 1">
+        </a>
+      </div>
+      <div class="slide">
+        <a href="page2.html">
+          <img src="https://www.moncanapemarocain.com/wp-content/uploads/2021/11/Pouf-en-cuir-de-qualité-supérieure-avec-broderies-en-sabra-Etsy-scaled.jpg" alt="Image 2">
+        </a>
+      </div>
+      <div class="slide">
+        <a href="page3.html">
+          <img src="https://atlas-artisan.com/cdn/shop/collections/sacs-et-cartables-cuir-747809_1200x1200.jpg?v=1729175161" alt="Image 3">
+        </a>
+      </div>
+    </div>
+    <button class="prev" onclick="prevSlide()">❮</button>
+    <button class="next" onclick="nextSlide()">❯</button>
+  </div>
+
+  <!-- Category Buttons -->
+  <div class="section-title">Categories</div>
+  <div class="category-buttons">
+    <!-- باقي أكواد الفئات -->
+  </div>
+  <div class="category-buttons">
+    <div class="category-button rug">
+      <img src="https://png.pngtree.com/png-vector/20220519/ourmid/pngtree-carpet-icon-home-interior-abstract-png-image_4671852.png" alt="Rug">
+      <span class="category-label">Rug</span>
+    </div>
+    <div class="category-button">
+      <img src="https://st4.depositphotos.com/12780408/22918/v/450/depositphotos_229183680-stock-illustration-leather-bag-black-icon-vector.jpg" alt="Leather Bags">
+      <span class="category-label">Bags</span>
+    </div>
+    <div class="category-button">
+      <img src="https://rukminim2.flixcart.com/image/850/1000/jdajwy80/showpiece-figurine/y/t/t/ajn970013-arihantt-original-imaf28mhc7dxduzf.jpeg?q=90&crop=false" alt="Brass Décor">
+      <span class="category-label">Brass</span>
+    </div>
+    <div class="category-button">
+      <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTd-Ws0mWb0OoK9gVFC0oihlzaR2WVOSUtGDTnsW1GiHmTqt_25" alt="Pottery">
+      <span class="category-label">Pottery</span>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="section-title">Best products</div>
+  <div class="category-buttons">
+    <!-- باقي أكواد الفئات -->
+  </div>
+  <div class="products-container">
+    <div class="product">
+      <img src="https://i.etsystatic.com/27537528/r/il/2f7ce5/3001865965/il_570xN.3001865965_smzz.jpg" alt="Product 1">
+      <div class="product-title">Handmade Rug</div>
+      <div class="price">$100</div>
+      <button class="btn">View Product</button>
+    </div>
+    <div class="product">
+      <img src="https://www.moncanapemarocain.com/wp-content/uploads/2021/11/Pouf-en-cuir-de-qualité-supérieure-avec-broderies-en-sabra-Etsy-scaled.jpg" alt="Product 2">
+      <div class="product-title">Leather Pouf</div>
+      <div class="price">$75</div>
+      <button class="btn">View Product</button>
+    </div>
+    <div class="product">
+      <img src="https://atlas-artisan.com/cdn/shop/collections/sacs-et-cartables-cuir-747809_1200x1200.jpg?v=1729175161" alt="Product 3">
+      <div class="product-title">Leather Bag</div>
+      <div class="price">$150</div>
+      <button class="btn">View Product</button>
+    </div>
+    <div class="product">
+      <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTd-Ws0mWb0OoK9gVFC0oihlzaR2WVOSUtGDTnsW1GiHmTqt_25" alt="Product 4">
+      <div class="product-title">Handmade Pottery</div>
+      <div class="price">$40</div>
+      <button class="btn">View Product</button>
+    </div>
+    <div class="product">
+      <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTd-Ws0mWb0OoK9gVFC0oihlzaR2WVOSUtGDTnsW1GiHmTqt_25" alt="Product 4">
+      <div class="product-title">Handmade Pottery</div>
+      <div class="price">$40</div>
+      <button class="btn">View Product</button>
+    </div>
+    <div class="product">
+      <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTd-Ws0mWb0OoK9gVFC0oihlzaR2WVOSUtGDTnsW1GiHmTqt_25" alt="Product 4">
+      <div class="product-title">Handmade Pottery</div>
+      <div class="price">$40</div>
+      <button class="btn">View Product</button>
+    </div>
+    <div class="product">
+      <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTd-Ws0mWb0OoK9gVFC0oihlzaR2WVOSUtGDTnsW1GiHmTqt_25" alt="Product 4">
+      <div class="product-title">Handmade Pottery</div>
+      <div class="price">$40</div>
+      <button class="btn">View Product</button>
+    </div>
+    <div class="product">
+      <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTd-Ws0mWb0OoK9gVFC0oihlzaR2WVOSUtGDTnsW1GiHmTqt_25" alt="Product 4">
+      <div class="product-title">Handmade Pottery</div>
+      <div class="price">$40</div>
+      <button class="btn">View Product</button>
+    </div>
+    <div class="product">
+      <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTd-Ws0mWb0OoK9gVFC0oihlzaR2WVOSUtGDTnsW1GiHmTqt_25" alt="Product 4">
+      <div class="product-title">Handmade Pottery</div>
+      <div class="price">$40</div>
+      <button class="btn">View Product</button>
+    </div>
+    <a href="https://wa.me/yourphonenumber" class="whatsapp-button" target="_blank">
+      <img src="https://github.com/user-attachments/assets/727ef71c-7716-44f3-b955-c6a93ec0b422" alt="WhatsApp">
+      Chat with us
+    </a>
+
+    <script>
+      let slideIndex = 0;
+
+      function showSlides() {
+        let slides = document.querySelectorAll('.slide');
+        if (slideIndex >= slides.length) slideIndex = 0;
+        if (slideIndex < 0) slideIndex = slides.length - 1;
+        document.querySelector('.slides').style.transform = `translateX(-${slideIndex * 100}%)`;
+      }
+
+      function nextSlide() {
+        slideIndex++;
+        showSlides();
+      }
+
+      function prevSlide() {
+        slideIndex--;
+        showSlides();
+      }
+      setInterval(nextSlide, 3000); // Auto slide every 3 seconds
+    </script>
+
+</body>
+
+</html>
