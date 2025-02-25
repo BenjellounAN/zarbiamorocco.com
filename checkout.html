@@ -36,11 +36,14 @@
             margin-top: 20px;
         }
     </style>
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+    <!-- تضمين مكتبة PayPal -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_API_KEY&currency=USD"></script>
 </head>
 <body>
     <div class="container">
         <h2>Checkout</h2>
+        
+        <!-- استمارة العميل -->
         <label for="name">Full Name</label>
         <input type="text" id="name" placeholder="Enter your full name">
         
@@ -50,34 +53,50 @@
         <label for="address">Shipping Address</label>
         <input type="text" id="address" placeholder="Enter your address">
         
+        <!-- قائمة المنتجات -->
+        <h3>Choose Products:</h3>
+        <label for="product1">Product 1 - $50</label>
+        <input type="checkbox" id="product1" data-price="50">
+        
+        <label for="product2">Product 2 - $30</label>
+        <input type="checkbox" id="product2" data-price="30">
+        
+        <label for="product3">Product 3 - $20</label>
+        <input type="checkbox" id="product3" data-price="20">
+        
         <div id="paypal-button-container" class="paypal-button"></div>
     </div>
 
     <script>
-        // استدعاء API لاسترجاع PAYPAL_API_KEY
-        fetch('/api/getPaypalApiKey')
-            .then(response => response.json())
-            .then(data => {
-                const paypalApiKey = data.apiKey;
-                console.log('تم استرجاع API Key:', paypalApiKey);
+        // إعداد المتغير البيئي - في Vercel سيُستبدل هذا بالقيمة الفعلية
+        const PAYPAL_API_KEY = process.env.PAYPAL_API_KEY; // هذا سيعمل في بيئة الخادم فقط
 
-                // مثال لاستدعاء زر الدفع:
-                paypal.Buttons({
-                    createOrder: function(data, actions) {
-                        return actions.order.create({
-                            purchase_units: [{
-                                amount: { value: '100.00' } // تحديث السعر حسب المنتج
-                            }]
-                        });
-                    },
-                    onApprove: function(data, actions) {
-                        return actions.order.capture().then(function(details) {
-                            alert('Transaction completed by ' + details.payer.name.given_name);
-                        });
-                    }
-                }).render('#paypal-button-container');
-            })
-            .catch(error => console.error('Error fetching PayPal API key:', error));
+        // حساب المبلغ الإجمالي بناءً على المنتجات المحددة
+        function calculateTotal() {
+            let total = 0;
+            if (document.getElementById("product1").checked) total += parseFloat(document.getElementById("product1").dataset.price);
+            if (document.getElementById("product2").checked) total += parseFloat(document.getElementById("product2").dataset.price);
+            if (document.getElementById("product3").checked) total += parseFloat(document.getElementById("product3").dataset.price);
+            return total;
+        }
+
+        // إضافة زر PayPal
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                const total = calculateTotal(); // الحصول على المجموع الإجمالي
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: { value: total.toFixed(2) } // إرسال المبلغ الإجمالي
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    // يمكنك هنا إرسال التفاصيل إلى قاعدة البيانات أو البريد الإلكتروني
+                });
+            }
+        }).render('#paypal-button-container');
     </script>
 </body>
 </html>
