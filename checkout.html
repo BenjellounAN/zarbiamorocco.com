@@ -37,7 +37,7 @@
         }
     </style>
     <!-- تضمين مكتبة PayPal -->
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_API_KEY&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=PAYPAL_API_KEY&currency=USD"></script>
 </head>
 <body>
     <div class="container">
@@ -68,12 +68,10 @@
     </div>
 
     <script>
-        // إعداد المتغير البيئي - في Vercel سيُستبدل هذا بالقيمة الفعلية
-        const PAYPAL_API_KEY = process.env.PAYPAL_API_KEY; // هذا سيعمل في بيئة الخادم فقط
-
         // حساب المبلغ الإجمالي بناءً على المنتجات المحددة
         function calculateTotal() {
             let total = 0;
+            // إضافة السعر للمنتجات المختارة
             if (document.getElementById("product1").checked) total += parseFloat(document.getElementById("product1").dataset.price);
             if (document.getElementById("product2").checked) total += parseFloat(document.getElementById("product2").dataset.price);
             if (document.getElementById("product3").checked) total += parseFloat(document.getElementById("product3").dataset.price);
