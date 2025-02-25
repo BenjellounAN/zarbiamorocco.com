@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - PayPal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F8F8F8;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .paypal-button {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Checkout</h2>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your full name">
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email">
+        
+        <label for="address">Shipping Address</label>
+        <input type="text" id="address" placeholder="Enter your address">
+        
+        <div id="paypal-button-container" class="paypal-button"></div>
+    </div>
+
+    <script>
+        // استدعاء API لاسترجاع PAYPAL_API_KEY
+        fetch('/api/getPaypalApiKey')
+            .then(response => response.json())
+            .then(data => {
+                const paypalApiKey = data.apiKey;
+                console.log('تم استرجاع API Key:', paypalApiKey);
+
+                // مثال لاستدعاء زر الدفع:
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: { value: '100.00' } // تحديث السعر حسب المنتج
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            alert('Transaction completed by ' + details.payer.name.given_name);
+                        });
+                    }
+                }).render('#paypal-button-container');
+            })
+            .catch(error => console.error('Error fetching PayPal API key:', error));
+    </script>
+</body>
+</html>
